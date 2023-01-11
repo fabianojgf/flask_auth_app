@@ -1,0 +1,4 @@
+auth/Lib/*
+auth/include/*
+auth/Scripts/*
+auth/project/__pycache__/
