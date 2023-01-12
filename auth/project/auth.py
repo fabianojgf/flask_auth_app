@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user
+from datetime import datetime
 from .models import User
 from . import db
 
@@ -50,8 +51,12 @@ def signup_post():
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
+    now = datetime.now()
+    # yyyy-MM-dd HH:M:S
+    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(name=name, email=email, password=generate_password_hash(password, method='sha256'), create_date=now, update_date=None)
 
     # add the new user to the database
     db.session.add(new_user)
