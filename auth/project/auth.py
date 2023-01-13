@@ -43,12 +43,17 @@ def signup_post():
     # code to validate and add user to database goes here
     email = request.form.get('email')
     name = request.form.get('name')
-    password = request.form.get('password')
+    password = request.form.get('password')   
+    password_repeat = request.form.get('password-repeat')
 
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')
+        return redirect(url_for('auth.signup'))
+
+    if password != password_repeat:
+        flash('The password and confirmation are different')
         return redirect(url_for('auth.signup'))
 
     now = datetime.now()
