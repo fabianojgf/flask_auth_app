@@ -61,7 +61,13 @@ def signup_post():
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(name=name, email=email, password=generate_password_hash(password, method='sha256'), create_date=now, update_date=None)
+    new_user = User(name=name, 
+        email=email, 
+        password=generate_password_hash(password, method='sha256'), 
+        active=True,
+        authorized=False,
+        creation_date=now, 
+        update_date=None)
 
     # add the new user to the database
     db.session.add(new_user)

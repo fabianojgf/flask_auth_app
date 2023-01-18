@@ -1,7 +1,11 @@
 Para ajustar as dependências, execute:
 
-(flask_auth_app)$ python3 -m venv auth
-(auth)$ pip install flask flask-sqlalchemy flask-login
+python3 -m venv auth
+
+pip install flask flask-sqlalchemy flask-login flask-migrate
+pip install python-dotenv
+pip install db-sqlite3
+pip install Flask psycopg2 psycopg2-binary
 
 Para executar a aplicação, execute:
 
