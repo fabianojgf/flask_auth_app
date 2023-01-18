@@ -6,6 +6,7 @@ pip install flask flask-sqlalchemy flask-login flask-migrate
 pip install python-dotenv
 pip install db-sqlite3
 pip install Flask psycopg2 psycopg2-binary
+pip install Flask-Session
 
 Para executar a aplicação, execute:
 
