@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user
 from datetime import datetime
@@ -32,14 +32,17 @@ def login_post():
     login_user(user, remember=remember)
     
     new_access = Access(user_id=user.id,
-        user_agent="teste",
-        address="teste",
+        user_agent=request.user_agent.string,
+        address=request.remote_addr,
         date_in=datetime.now(),
         date_out=None)
 
     # add the new access to the database
     db.session.add(new_access)
     db.session.commit()
+
+    session['access_id'] = new_access.id
+    session['access_begin'] = new_access.date_in
 
     return redirect(url_for('main.profile'))
 
@@ -67,17 +70,13 @@ def signup_post():
         flash('The password and confirmation are different')
         return redirect(url_for('auth.signup'))
 
-    now = datetime.now()
-    # yyyy-MM-dd HH:M:S
-    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
-
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
     new_user = User(name=name, 
         email=email, 
         password=generate_password_hash(password, method='sha256'), 
         active=True,
         authorized=False,
-        creation_date=now, 
+        creation_date=datetime.now(), 
         update_date=None)
 
     # add the new user to the database
@@ -92,4 +91,15 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
+
+    if 'access_id' in session:
+        access_id = session['access_id']
+        access = Access.query.filter_by(id=access_id).first()
+        if access:
+            access.date_out = datetime.now()
+            db.session.commit()
+
+        session.pop('access_id', None)
+        session.pop('access_begin', None)
+
     return redirect(url_for('main.index'))

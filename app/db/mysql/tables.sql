@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS general.access
 (
     id int4 NOT NULL,
     user_id int4 NOT NULL,
-    address character varying(30)[] COLLATE pg_catalog."default",
-    user_agent text COLLATE pg_catalog."default",
+    address character varying(30) NULL,
+    user_agent text NULL,
     date_in timestamp without time zone NOT NULL,
     date_out timestamp without time zone,
     
