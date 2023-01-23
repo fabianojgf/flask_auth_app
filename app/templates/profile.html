@@ -1,7 +1,97 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome, {{ name }}!
-</h1>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<style>
+    .password-container {        
+        position: relative;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+        width: 100%;
+        padding: 12px 36px 12px 12px;
+        box-sizing: border-box;
+    }
+
+    .fa-eye {
+        position: absolute;
+        top: 28%;
+        right: 4%;
+        cursor: pointer;
+        color: lightgray;
+    }
+</style>
+
+<div class="column is-4 is-offset-4">
+    <h1 class="title">
+      Profile
+    </h1>
+    
+    <div class="box" id="signup-box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}.
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <div class="password-container">
+                        <input class="input is-large" type="password" name="password" id="password"
+                            placeholder="Password">
+                        <i class="fa-solid fa-eye" id="eye"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <div class="password-container">
+                        <input class="input is-large" type="password" name="password-repeat" id="password-repeat"
+                            placeholder="Repeat Password">
+                        <i class="fa-solid fa-eye" id="eye"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Update</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var passwordContainerArray = document.getElementsByClassName("password-container");
+    
+        for(let i = 0; i < passwordContainerArray.length; i++) {
+            var element = passwordContainerArray[i];
+            const inputEl = element.querySelector("input");
+            const iEl = element.querySelector("i");
+
+            iEl.addEventListener("click", function () {
+                this.classList.toggle("fa-eye-slash");
+                const type = inputEl.getAttribute("type") === "password" ? "text" : "password";
+                inputEl.setAttribute("type", type);
+            })
+        }
+    });
+</script>
+
 {% endblock %}

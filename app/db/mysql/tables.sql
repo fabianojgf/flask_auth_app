@@ -27,12 +27,19 @@ CREATE TABLE IF NOT EXISTS general.department
 (
     id int4 NOT NULL,
     name character varying(200) NOT NULL,
+    parent_id int4 NULL,
     active boolean DEFAULT true,
     creation_date timestamp without time zone,
     update_date timestamp without time zone,
     
 	CONSTRAINT department_pkey 
-		PRIMARY KEY (id)
+		PRIMARY KEY (id),
+    CONSTRAINT parent_id_fkey 
+		FOREIGN KEY (parent_id)
+		REFERENCES general.department (id) MATCH SIMPLE
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION
+		NOT VALID
 )
 WITH (
     OIDS = FALSE
@@ -56,6 +63,7 @@ CREATE TABLE IF NOT EXISTS general."user"
     name character varying(200) NOT NULL,
     email character varying(200) NOT NULL,
     password character varying(200) NOT NULL,
+    type int4 DEFAULT 2,
     active boolean DEFAULT true,
     authorized boolean DEFAULT false,
     creation_date timestamp without time zone,
@@ -67,6 +75,8 @@ CREATE TABLE IF NOT EXISTS general."user"
 WITH (
     OIDS = FALSE
 );
+
+COMMENT ON COLUMN general."user".type is 'User type: 1 - ADMIN; 2 - COMMON';
 
 CREATE TABLE IF NOT EXISTS general.permission
 (

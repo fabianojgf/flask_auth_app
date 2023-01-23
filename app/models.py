@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
+    type = db.Column(db.Integer)
     active = db.Column(db.Boolean)  
     authorized = db.Column(db.Boolean)
     creation_date = db.Column(db.Date)
@@ -20,9 +21,12 @@ class Department(db.Model):
 
     id = db.Column(db.Integer, db.Sequence("department_seq", schema="general"), primary_key=True)
     name = db.Column(db.String(200))
+    parent_id = db.Column(db.Integer, db.ForeignKey('general.department.id'))
     active = db.Column(db.Boolean)  
     creation_date = db.Column(db.Date)
     update_date = db.Column(db.Date)
+
+    children = db.relationship('Department', backref=db.backref('parent', remote_side=[id]))
 
 class PermissionType(db.Model):
     __tablename__ = 'permission_type'
@@ -35,10 +39,13 @@ class Permission(db.Model):
     __tablename__ = 'permission'
     __table_args__ = {'schema':'general'}
 
-    id = db.Column(db.Integer, db.Sequence("permission_seq", schema="general"), primary_key=True)
+    id = db.Column(db.Integer, db.Sequence("permission_seq", schema="general"), primary_key=True)   
     user_id = db.Column(db.Integer, db.ForeignKey('general.user.id'))
-    department_id = db.Column(db.Integer, db.ForeignKey('general.department.id'))
-    permission_type_id = db.Column(db.Integer, db.ForeignKey('general.permission_type.id'))
+    user = db.relationship("User", backref=db.backref("user", uselist=False))   
+    department_id = db.Column(db.Integer, db.ForeignKey('general.department.id'))   
+    department = db.relationship("Department", backref=db.backref("department", uselist=False))   
+    permission_type_id = db.Column(db.Integer, db.ForeignKey('general.permission_type.id'))   
+    permission_type = db.relationship("PermissionType", backref=db.backref("permission_type", uselist=False))   
     begin = db.Column(db.Date)
     end = db.Column(db.Date)
     active = db.Column(db.Boolean)  
@@ -52,7 +59,7 @@ class Access(db.Model):
 
     id = db.Column(db.Integer, db.Sequence("access_seq", schema="general"), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('general.user.id'))
-    user = db.relationship("User", backref=db.backref("user", uselist=False))
+    user = db.relationship("User")
     address = db.Column(db.String(30))
     user_agent = db.Column(db.String(200))
     date_in = db.Column(db.Date)
