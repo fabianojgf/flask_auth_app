@@ -41,6 +41,7 @@ def login_post():
     db.session.add(new_access)
     db.session.commit()
 
+    session['user_firstname'] = user.name.split()[0]
     session['access_id'] = new_access.id
     session['access_begin'] = new_access.date_in
 

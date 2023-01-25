@@ -8,74 +8,25 @@
     <title>Flask Auth Example</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <style>
-
-        section {
-            background-color: #3169b3 !important;
-        }
-
-        section .hero-body {
-            background-color: #bed6f7;
-        }
-
-        .navbar-dropdown {
-        color: #124385 !important;
-    	background-color: white;
-    	border-bottom-left-radius: 6px;
-    	border-bottom-right-radius: 6px;
-    	border-top: 2px solid #dbdbdb;
-    	box-shadow: 0 8px 8px rgba(10, 10, 10, 0.1);
-    	display: none;
-    	font-size: 0.875rem;
-    	left: 0;
-    	min-width: 100%;
-    	position: absolute;
-    	top: 100%;
-    	z-index: 20;
-    }
-
         a i {
-            padding: 4px;
-        }
-
-
-        .navbar a:hover,
-        .navbar-item-dropdown:hover .navbar-item-dropdown-button {
-            background-color: #4f85cc !important;
-        }
-
-        .navbar-item:hover .navbar-menu{
-            background-color: #4f85cc !important;
-            color: #fff !important;
-        }
-
-        .navbar-item-dropdown:hover .navbar-menu {
-            background-color: #4f85cc !important;
-            color: #fff !important;
-        }
-
-        .hero.is-primary a:not(.button):not(.dropdown-item):not(.tag) {
-            background-color: #3169b3;
-        }
-
-        .hero.is-primary > .navbar-item {
-            background-color: white !important;
+            padding: 3px 7px;
         }
     </style>
 </head>
 
 <body>
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-fullheight">
         <div class="hero-head">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-light" role="navigation" aria-label="main navigation">
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="https://bulma.io">
                             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
                         </a>
-                    
-                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenuHeroA">
+
+                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                            data-target="navbarMenuHeroA">
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
@@ -83,46 +34,44 @@
                     </div>
 
                     <div id="navbarMenuHeroA" class="navbar-menu">
-                        {% if current_user.is_authenticated %}
                         <div class="navbar-start">
-                            <a href="#" class="navbar-item">{{ name }}</a>
-                        </div>
-                        {% endif %}
-                        <div class="navbar-end">
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
-                                <i class="fa fa-home" aria-hidden="true"></i>Home</a>                            
-
+                                <i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                            {% if current_user.is_authenticated %}                       
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">
+                                        Data
+                                    </a>
+                                    <div class="navbar-dropdown is-right">
+                                        <a href="#" class="navbar-item">
+                                            <i class="fa fa-university" aria-hidden="true"></i> Departments</a>
+                                        <a href="#" class="navbar-item">
+                                            <i class="fa fa-phone" aria-hidden="true"></i> Contacts</a>
+                                        <a href="#" class="navbar-item">
+                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Knowledges</a>
+                                    </div>                            
+                                </div>                            
+                            {% endif %}
+                        </div>
+                        <div class="navbar-end">
                             {% if current_user.is_authenticated %}
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a class="navbar-link">
-                                    Data
-                                </a>                        
-                                <div class="navbar-dropdown">
-                                    <a href="#" class="navbar-item">
-                                        <i class="fa fa-university" aria-hidden="true"></i> Departments</a>
-                                    <a href="#" class="navbar-item">
-                                        <i class="fa fa-phone" aria-hidden="true"></i> Contacts</a>
-                                    <a href="#" class="navbar-item">
-                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Knowledges</a>
+                                    <span><i class="fa fa-user-circle" aria-hidden="true"></i> </span>{{ session['user_firstname'] }}
+                                </a>
+                                <div class="navbar-dropdown is-right">
+                                    <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                        <span><i class="fa fa-user-circle" aria-hidden="true"></i> </span> Profile</a>
+                                    <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                        <span></span><i class="fa fa-sign-out" aria-hidden="true"></i> </span> Logout</a>
                                 </div>
                             </div>
-
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    Account
-                                </a>                        
-                                <div class="navbar-dropdown">
-                                    <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                        <i class="fa fa-user-circle" aria-hidden="true"></i> Profile</a>
-                                    <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-                                </div>
-                            </div>                            
                             {% endif %}
-
                             {% if not current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.login') }}" class="navbar-item"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
-                            <a href="{{ url_for('auth.signup') }}" class="navbar-item"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a>
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item"><i class="fa fa-sign-in"
+                                    aria-hidden="true"></i> Login</a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item"><i class="fa fa-user"
+                                    aria-hidden="true"></i> Sign Up</a>
                             {% endif %}
                         </div>
                     </div>
@@ -146,7 +95,7 @@
             document.querySelectorAll('.navbar-burger'), 0);
 
         // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
+        $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
                 // Get the target from the "data-target" attribute
                 const target = el.dataset.target;

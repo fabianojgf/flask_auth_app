@@ -12,3 +12,18 @@ def index():
 @login_required
 def profile():
     return render_template('profile.html', name=current_user.name)
+
+@main.route('/profile/personal')
+@login_required
+def profilePersonal():
+    return render_template('profile/personal.html')
+
+@main.route('/profile/security')
+@login_required
+def profileSecurity():
+    return render_template('profile/security.html')
+
+@main.route('/profile/permissions')
+@login_required
+def profilePermissions():
+    return render_template('profile/permissions.html')

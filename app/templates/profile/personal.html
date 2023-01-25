@@ -1,0 +1,67 @@
+{% extends "profile/profile.html" %}
+
+{% block content_profile %}
+
+<form class="form-horizontal">
+    <fieldset class="fieldset">
+        <h3 class="fieldset-title">Personal Info</h3>
+        <div class="columns">
+            <div class="column is-4">
+                <figure class="image is-square">
+                    <img class="is-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                </figure>
+                <div class="field">
+                    <div class="control">
+                        <input type="file" class="button is-light"/>
+                        <button type="submit" class="button is-primary">Update Image</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input type="text" class="input" value="Rebecca">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input type="email" class="input" value="Rebecca@website.com">
+                        <p class="help-block">This is the email </p>
+                    </div>
+                </div>
+                <fieldset>
+                    <div class="field">
+                        <label class="label">User Type</label>
+                        <div class="control">
+                            <div class="select">
+                                <select>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Common</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+    <hr>
+    <div class="column">
+        <div class="field">
+            <input class="button is-primary" type="submit" value="Update Profile">
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        inativeMenuItens();
+
+        var liElement = document.getElementById("profile_menu_profile");
+        liElement.classList.add("active");
+    });
+</script>
+
+{% endblock %}
