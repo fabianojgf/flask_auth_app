@@ -5,3 +5,7 @@ POSTGRES_URL='127.0.0.1:5432'
 POSTGRES_USER='chat-app'
 POSTGRES_PASSWORD='123456'
 POSTGRES_DB='chat-data'
+
+UPLOAD_FOLDER = 'C:\Users\fabia\DIR_FILES\MinhaUFC\upload'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+MAX_CONTENT_LENGTH = 16 * 1000 * 1000

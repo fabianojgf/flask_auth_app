@@ -2,47 +2,61 @@
 
 {% block content_profile %}
 
-<form class="form-horizontal">
+<form method="POST" action="/profile/personal" class="form-horizontal" enctype="multipart/form-data">
     <fieldset class="fieldset">
         <h3 class="fieldset-title">Personal Info</h3>
         <div class="columns">
             <div class="column is-4">
                 <figure class="image is-square">
-                    <img class="is-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <img id="image" class="is-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                 </figure>
                 <div class="field">
                     <div class="control">
-                        <input type="file" class="button is-light"/>
+                        <input type="file" name="file" id="file" class="button is-light" />
                         <button type="submit" class="button is-primary">Update Image</button>
                     </div>
                 </div>
             </div>
             <div class="column">
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control">
-                        <input type="text" class="input" value="{{ current_user.name }}">
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                        <input type="email" class="input" value="{{ current_user.email }}">
-                    </div>
-                </div>
-                <fieldset>
+                <div class="column">
+                    <label for="email">Name</label>
                     <div class="field">
-                        <label class="label">User Type</label>
-                        <div class="control">
-                            <div class="select">
-                                <select>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Common</option>
-                                </select>
+                        <p class="control has-icons-left">
+                            <input class="input is-primary" type="name" name="name" id="name" value="{{user.name}}"
+                                autofocus="">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <label for="email">Email</label>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input is-primary" type="email" name="email" id="email" value="{{user.email}}"
+                                autofocus="">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <fieldset>
+                        <div class="field">
+                            <label class="label">User Type</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Common</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
         </div>
     </fieldset>
@@ -55,12 +69,17 @@
 </form>
 
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         inativeMenuItens();
 
         var liElement = document.getElementById("profile_menu_profile");
         liElement.classList.add("active");
     });
+
+    document.getElementById('file').onchange = function () {
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('image').src = src
+    }
 </script>
 
 {% endblock %}
