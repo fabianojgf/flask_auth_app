@@ -1,5 +1,11 @@
 from flask_login import UserMixin
+from enum import Enum
+from datetime import date
 from app import db
+
+class UserType(Enum):
+    ADMIN = 1
+    COMMON = 2        
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -14,6 +20,26 @@ class User(UserMixin, db.Model):
     authorized = db.Column(db.Boolean)
     creation_date = db.Column(db.Date)
     update_date = db.Column(db.Date)
+
+    @property
+    def creation_date_str(self):
+        return self.creation_date.strftime("%d/%m/%Y")
+    @property
+    def type_str(self):
+        if self.type == UserType.ADMIN.value:
+            return "Admin"
+        if self.type == UserType.COMMON.value:
+            return "Common User"
+        return "Unknown"
+    @property
+    def is_admin(self):
+        return self.type == 1
+    @property
+    def is_active(self):
+        return self.active
+    @property
+    def is_authorized(self):
+        return self.authorized
 
 class Department(db.Model):
     __tablename__ = 'department'

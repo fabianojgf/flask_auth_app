@@ -21,14 +21,13 @@
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        <input type="text" class="input" value="Rebecca">
+                        <input type="text" class="input" value="{{ current_user.name }}">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input type="email" class="input" value="Rebecca@website.com">
-                        <p class="help-block">This is the email </p>
+                        <input type="email" class="input" value="{{ current_user.email }}">
                     </div>
                 </div>
                 <fieldset>

@@ -28,6 +28,10 @@ def login_post():
         flash('Please check your login details and try again.')
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
 
+    if not user.authorized:
+        flash('The user is not authorized.')
+        return redirect(url_for('auth.login')) # if the user exists, but is not authorized.
+
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
     
@@ -75,6 +79,7 @@ def signup_post():
     new_user = User(name=name, 
         email=email, 
         password=generate_password_hash(password, method='sha256'), 
+        type=2,
         active=True,
         authorized=False,
         creation_date=datetime.now(), 

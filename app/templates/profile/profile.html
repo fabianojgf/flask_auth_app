@@ -662,11 +662,15 @@
                         <img class="is-rounded"
                             src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                         <ul class="meta list list-unstyled">
-                            <li class="name">Rebecca Sanders
-                                <p class="user-type-admin">Admin</span>
+                            <li class="name">{{ current_user.name }}
+                                {% if current_user.is_admin %}
+                                <p class="user-type-admin">{{ current_user.type_str }}</p>
+                                {% endif %}
+                                {% if not current_user.is_admin %}
+                                <p class="user-type-common">{{ current_user.type_str }}</p>
+                                {% endif %}
                             </li>
-                            <li class="email"><a href="#">Rebecca.S@website.com</a></li>
-                            <li class="activity">Last logged in: 25/01/2023 17:01</li>
+                            <li class="activity">User Since: <br/>{{ current_user.creation_date_str }}</li>
                         </ul>
                     </div>
                     <nav class="side-menu">

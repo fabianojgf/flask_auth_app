@@ -21,43 +21,78 @@
         cursor: pointer;
         color: lightgray;
     }
+
+    .hero-sign-in {
+        align-items: center;
+    }
+
+    .hero-sign-in h2 {
+       text-align: center;
+       font-weight: bold;
+    }
+
+    .notification {     
+        font-size: small;   
+        text-align: justify;
+        box-sizing: border-box !important;
+    }
+
 </style>
 
-<div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
-    <div class="box">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="notification is-danger">
-            {{ messages[0] }}
-        </div>
-        {% endif %}
-        {% endwith %}
-        <form method="POST" action="/login">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+<div class="hero hero-sign-in">
+    <div class="hero-body is-justify-content-center is-align-items-center">
+        <div class="columns is-flex is-flex-direction-column box">
+            <form method="POST" action="/login">
+                                
+                <div class="column">
+                    <h2>Sign in</h2>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <div class="password-container">
-                        <input class="input is-large" type="password" name="password" id="password"
-                            placeholder="Password">
-                        <i class="fa fa-eye" id="eye"></i>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="column">
+                    <div class="notification is-danger">
+                        {{ messages[0] }}
                     </div>
                 </div>
-            </div>
+                {% endif %}
+                {% endwith %}
 
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
-        </form>
+                <div class="column">
+                    <label for="email">Email</label>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input is-primary" type="email" name="email" id="email" placeholder="Your Email" autofocus="">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <label for="password">Password</label>
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right password-container">
+                            <input class="input is-primary" type="password" name="password" id="password" placeholder="Password">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <i class="fa fa-eye"></i>                        
+                        </p>
+                        <a href="forget.html" class="is-size-7 has-text-primary">forget password?</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <button class="button is-primary is-fullwidth" type="submit">Login</button>
+                </div>
+                <div class="has-text-centered">
+                    <p class="is-size-7"> Don't have an account? <a href="{{ url_for('auth.signup') }}" class="has-text-primary">Sign up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -65,15 +100,16 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         var passwordContainerArray = document.getElementsByClassName("password-container");
     
-        for(let i = 0; i < passwordContainerArray.length; i++) {
+        for (let i = 0; i < passwordContainerArray.length; i++) {
             var element = passwordContainerArray[i];
             const inputEl = element.querySelector("input");
-            const iEl = element.querySelector("i");
+            const iEl = element.querySelector("i.fa-eye");
 
             iEl.addEventListener("click", function () {
                 this.classList.toggle("fa-eye-slash");
                 const type = inputEl.getAttribute("type") === "password" ? "text" : "password";
                 inputEl.setAttribute("type", type);
+                inputEl.focus();
             })
         }
     });

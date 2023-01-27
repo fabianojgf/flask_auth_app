@@ -15,14 +15,13 @@
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        <input type="text" class="input" value="Rebecca" disabled>
+                        <input type="text" class="input" value="{{ current_user.name }}" disabled>
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input type="email" class="input" value="Rebecca@website.com" disabled>
-                        <p class="help-block">This is the email </p>
+                        <input type="email" class="input" value="{{ current_user.email }}" disabled>
                     </div>
                 </div>
                 <div class="field">
