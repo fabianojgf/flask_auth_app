@@ -607,7 +607,7 @@
         }
 
         .view-account .side-bar .side-menu .nav>li.active a {
-            background: #f9f9fb;borde
+            background: #f9f9fb;
             border-right: 4px solid #40babd;
             border-bottom: none
         }
@@ -651,6 +651,29 @@
             background-color: black !important;
         }
     }
+    
+    .password-container {        
+        position: relative;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+        width: 100%;
+        padding: 12px 36px 12px 12px;
+        box-sizing: border-box;
+    }
+
+    .fa-eye {
+        position: absolute;
+        top: 28%;
+        right: 2%;
+        cursor: pointer;
+        color: lightgray;
+    }
+
+    .form_footer {
+        text-align: center;
+    }
 </style>
 
 <div class="container">
@@ -677,7 +700,6 @@
                         <ul class="nav">
                             <li id="profile_menu_profile" class="active"><a href="{{ url_for('main.profile_personal') }}"><span class="fa fa-user"></span> Profile</a></li>
                             <li id="profile_menu_security"><a href="{{ url_for('main.profile_security') }}"><span class="fa fa-lock"></span> Security</a></li>
-                            <li id="profile_menu_permissions"><a href="{{ url_for('main.profile_permissions') }}"><span class="fa fa-gavel"></span> Permissions</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -701,6 +723,23 @@
             liElement.classList.remove("active");
         }
     };
+
+    function enableChangeVisibilityPassword() {
+        var passwordContainerArray = document.getElementsByClassName("password-container");
+    
+        for (let i = 0; i < passwordContainerArray.length; i++) {
+            var element = passwordContainerArray[i];
+            const inputEl = element.querySelector("input");
+            const iEl = element.querySelector("i.fa-eye");
+
+            iEl.addEventListener("click", function () {
+                this.classList.toggle("fa-eye-slash");
+                const type = inputEl.getAttribute("type") === "password" ? "text" : "password";
+                inputEl.setAttribute("type", type);
+                inputEl.focus();
+            })
+        }
+    }
 </script>
 
 {% endblock %}

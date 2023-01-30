@@ -33,4 +33,12 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+     # blueprint for any parts in our app
+    from .permission import permission as permission_blueprint
+    app.register_blueprint(permission_blueprint)
+
+    # blueprint for any parts in our app
+    from .department import department as department_blueprint
+    app.register_blueprint(department_blueprint)
+
     return app

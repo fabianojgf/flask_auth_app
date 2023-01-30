@@ -57,6 +57,18 @@ WITH (
     OIDS = FALSE
 );
 
+CREATE TABLE IF NOT EXISTS general.permission_status
+(
+    id int4 NOT NULL,
+    description character varying(30) NOT NULL,
+    
+	CONSTRAINT permission_status_pkey 
+		PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
 CREATE TABLE IF NOT EXISTS general."user"
 (
     id int4 NOT NULL,
@@ -84,10 +96,10 @@ CREATE TABLE IF NOT EXISTS general.permission
     user_id int4 NOT NULL,
     department_id int4,
     permission_type_id int4 NOT NULL,
+    permission_status_id int4 NOT NULL,
     begin date,
     "end" date,
     active boolean DEFAULT true,
-    authorized boolean DEFAULT false,
     creation_date timestamp without time zone,
     update_date timestamp without time zone,
     
@@ -102,6 +114,12 @@ CREATE TABLE IF NOT EXISTS general.permission
 	CONSTRAINT permission_type_id_fkey 
 		FOREIGN KEY (permission_type_id)
 		REFERENCES general.permission_type (id) MATCH SIMPLE
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION
+		NOT VALID,
+	CONSTRAINT permission_status_id_fkey 
+		FOREIGN KEY (permission_status_id)
+		REFERENCES general.permission_status (id) MATCH SIMPLE
 		ON UPDATE NO ACTION
 		ON DELETE NO ACTION
 		NOT VALID,
@@ -143,6 +161,7 @@ END;
 --DROP TABLE general.access;
 --DROP TABLE general.permission;
 --DROP TABLE general.permission_type;
+--DROP TABLE general.permission_status;
 --DROP TABLE general.department;
 --DROP TABLE general.user;
 

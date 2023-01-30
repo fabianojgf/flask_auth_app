@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="content-panel">
+        <section class="module">
+            <div class="module-inner">
+                <form method="POST" action="/data/department/new" class="form-horizontal">
+                    <fieldset class="fieldset">
+                        <h3 class="fieldset-title">Edit Department</h3>
+                        <div class="field">
+                            <label class="label">Name</label>
+                            <p class="control">
+                                <input class="input is-primary" type="text" name="name" id="name">
+                            </p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Parent Department</label>
+                            <p class="control has-icons-left">
+                                <span class="select">
+                                    <select name="parentDepartmentSelect">
+                                        <option value="0">Select</option>
+                                        {% for parentDepartment in departments %}
+                                        <option value="{{ parentDepartment.id }}">{{ parentDepartment.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </span>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-building"></i>
+                                </span>
+                            </p>
+                        </div>                        
+                    </fieldset>
+                    <hr>
+                    <div class="column">
+                        <div class="field">
+                            <input class="button is-primary" type="submit" value="Update">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

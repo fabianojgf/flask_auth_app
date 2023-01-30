@@ -13,7 +13,6 @@
                 <div class="field">
                     <div class="control">
                         <input type="file" name="file" id="file" class="button is-light" />
-                        <button type="submit" class="button is-primary">Update Image</button>
                     </div>
                 </div>
             </div>
@@ -55,13 +54,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="field">
+                            <label class="label">Current Password</label>
+                            <p class="control has-icons-left has-icons-right password-container">
+                                <input class="input is-primary" type="password" name="current-password" id="current-password" placeholder="Current Password" autocomplete="new-password">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <i class="fa fa-eye"></i>                        
+                            </p>
+                        </div>
                     </fieldset>
                 </div>
             </div>
         </div>
     </fieldset>
     <hr>
-    <div class="column">
+    <div class="column form_footer">
         <div class="field">
             <input class="button is-primary" type="submit" value="Update Profile">
         </div>
@@ -69,16 +78,20 @@
 </form>
 
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function(event) {
         inativeMenuItens();
+        enableChangeVisibilityPassword();
+        enableImagePreview();
 
         var liElement = document.getElementById("profile_menu_profile");
-        liElement.classList.add("active");
+        liElement.classList.add("active"); 
     });
 
-    document.getElementById('file').onchange = function () {
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('image').src = src
+    function enableImagePreview() {
+        document.getElementById('file').onchange = function () {
+            var src = URL.createObjectURL(this.files[0])
+            document.getElementById('image').src = src
+        }
     }
 </script>
 

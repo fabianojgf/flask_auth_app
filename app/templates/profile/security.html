@@ -2,7 +2,7 @@
 
 {% block content_profile %}
 
-<form class="form-horizontal">
+<form class="form-horizontal" autocomplete="off">
     <h3 class="fieldset-title">Security Info</h3>
     <div class="columns">
         <div class="column is-4">
@@ -11,7 +11,7 @@
             </figure>
         </div>
         <div class="column">
-            <fieldset disabled>
+            <fieldset>
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
@@ -35,11 +35,41 @@
                         </div>
                     </div>
                 </div>
+                <div class="field">
+                    <label class="label">New Password</label>
+                    <p class="control has-icons-left has-icons-right password-container">
+                        <input class="input is-primary" type="password" name="new-password" id="new-password" placeholder="New Password" autocomplete="new-password">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <i class="fa fa-eye"></i>                        
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Repeat New Password</label>
+                    <p class="control has-icons-left has-icons-right password-container">
+                        <input class="input is-primary" type="password" name="new-password-repeat" id="new-password-repeat" placeholder="Repeat New Password" autocomplete="new-password">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <i class="fa fa-eye"></i>                        
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Current Password</label>
+                    <p class="control has-icons-left has-icons-right password-container">
+                        <input class="input is-primary" type="password" name="current-password" id="current-password" placeholder="Current Password" autocomplete="new-password">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <i class="fa fa-eye"></i>                        
+                    </p>
+                </div>
             </fieldset>
         </div>
     </div>
     <hr>
-    <div class="column">
+    <div class="column form_footer">
         <div class="field">
             <input class="button is-primary" type="submit" value="Update Profile">
         </div>
@@ -49,9 +79,10 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
         inativeMenuItens();
-        
+        enableChangeVisibilityPassword();
+
         var liElement = document.getElementById("profile_menu_security");
-        liElement.classList.add("active");
+        liElement.classList.add("active"); 
     });
 </script>
 

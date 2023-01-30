@@ -61,6 +61,13 @@ class PermissionType(db.Model):
     id = db.Column(db.Integer, db.Sequence("permission_type_seq", schema="general"), primary_key=True)
     description = db.Column(db.String(30))
 
+class PermissionStatus(db.Model):
+    __tablename__ = 'permission_status'
+    __table_args__ = {'schema':'general'}
+
+    id = db.Column(db.Integer, db.Sequence("permission_status_seq", schema="general"), primary_key=True)
+    description = db.Column(db.String(30))
+
 class Permission(db.Model):
     __tablename__ = 'permission'
     __table_args__ = {'schema':'general'}
@@ -72,10 +79,11 @@ class Permission(db.Model):
     department = db.relationship("Department", backref=db.backref("department", uselist=False))   
     permission_type_id = db.Column(db.Integer, db.ForeignKey('general.permission_type.id'))   
     permission_type = db.relationship("PermissionType", backref=db.backref("permission_type", uselist=False))   
+    permission_status_id = db.Column(db.Integer, db.ForeignKey('general.permission_status.id'))   
+    permission_status = db.relationship("PermissionStatus", backref=db.backref("permission_status", uselist=False)) 
     begin = db.Column(db.Date)
     end = db.Column(db.Date)
-    active = db.Column(db.Boolean)  
-    authorized = db.Column(db.Boolean)
+    active = db.Column(db.Boolean)
     creation_date = db.Column(db.Date)
     update_date = db.Column(db.Date)
 
