@@ -1,39 +1,61 @@
-{% extends "profile/profile.html" %}
+{% extends "account/profile/profile.html" %}
 
 {% block content_profile %}
 
-<form class="form-horizontal" autocomplete="off">
+<form method="POST" action="/profile/security" class="form-horizontal" autocomplete="off">
     <h3 class="fieldset-title">Security Info</h3>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="column">
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+
     <div class="columns">
-        <div class="column is-4">
+        <div class="column is-3">
             <figure class="image is-square">
-                <img class="is-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <img class="is-rounded" src="../../static/img/user_empty.jpg" alt="">
             </figure>
         </div>
         <div class="column">
             <fieldset>
                 <div class="field">
                     <label class="label">Name</label>
-                    <div class="control">
-                        <input type="text" class="input" value="{{ current_user.name }}" disabled>
-                    </div>
+                    <p class="control has-icons-left">
+                        <input class="input is-primary" type="name" name="name" id="name" 
+                            value="{{user.name}}" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </p>
                 </div>
                 <div class="field">
                     <label class="label">Email</label>
-                    <div class="control">
-                        <input type="email" class="input" value="{{ current_user.email }}" disabled>
-                    </div>
+                    <p class="control has-icons-left">
+                        <input class="input is-primary" type="email" name="email" id="email" 
+                            value="{{user.email}}" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </p>
                 </div>
                 <div class="field">
                     <label class="label">User Type</label>
-                    <div class="control">
-                        <div class="select">
+                    <p class="control has-icons-left">
+                        <span class="select">
                             <select disabled>
                                 <option value="1">Admin</option>
                                 <option value="2">Common</option>
                             </select>
-                        </div>
-                    </div>
+                        </span>
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-gavel"></i>
+                        </span>
+                    </p>
                 </div>
                 <div class="field">
                     <label class="label">New Password</label>

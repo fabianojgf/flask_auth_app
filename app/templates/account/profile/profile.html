@@ -683,7 +683,7 @@
                 <div class="side-bar">
                     <div class="user-info">
                         <img class="is-rounded"
-                            src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            src="../../static/img/user_empty.jpg" alt="">
                         <ul class="meta list list-unstyled">
                             <li class="name">{{ current_user.name }}
                                 {% if current_user.is_admin %}
@@ -698,8 +698,8 @@
                     </div>
                     <nav class="side-menu">
                         <ul class="nav">
-                            <li id="profile_menu_profile" class="active"><a href="{{ url_for('main.profile_personal') }}"><span class="fa fa-user"></span> Profile</a></li>
-                            <li id="profile_menu_security"><a href="{{ url_for('main.profile_security') }}"><span class="fa fa-lock"></span> Security</a></li>
+                            <li id="profile_menu_profile" class="active"><a href="{{ url_for('account_profile.profile_personal') }}"><span class="fa fa-user"></span> Profile</a></li>
+                            <li id="profile_menu_security"><a href="{{ url_for('account_profile.profile_security') }}"><span class="fa fa-lock"></span> Security</a></li>
                         </ul>
                     </nav>
                 </div>

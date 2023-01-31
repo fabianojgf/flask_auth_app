@@ -49,7 +49,7 @@ def login_post():
     session['access_id'] = new_access.id
     session['access_begin'] = new_access.date_in
 
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.index'))
 
 # SIGNUP #
 
