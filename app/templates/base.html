@@ -8,9 +8,20 @@
     <title>Flask Auth Example</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">   
+    <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bulma.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bulma.min.js"></script>
+
     <style>
-        a i {
-            padding: 3px 7px;
+        .navbar-item span.icon i{
+            padding: 3px 7px !important;
+        }
+        .navbar-item span.icon {
+            margin-right: 2px !important;
         }
     </style>
 </head>
@@ -21,8 +32,8 @@
             <nav class="navbar is-light" role="navigation" aria-label="main navigation">
                 <div class="container">
                     <div class="navbar-brand">
-                        <a class="navbar-item" href="https://bulma.io">
-                            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                        <a class="navbar-item" href="{{ url_for('main.index') }}">
+                            <img src="../../static/img/logo_large_hor_xs.png" width="112" height="28">
                         </a>
 
                         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -36,7 +47,7 @@
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-start">
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
-                                <i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                                <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span> Home</a>
                             {% if current_user.is_authenticated %}                       
                                 <div class="navbar-item has-dropdown is-hoverable">
                                     <a class="navbar-link">
@@ -44,11 +55,11 @@
                                     </a>
                                     <div class="navbar-dropdown is-right">
                                         <a href="#" class="navbar-item">
-                                            <i class="fa fa-university" aria-hidden="true"></i> Departments</a>
+                                            <span class="icon"><i class="fa fa-university" aria-hidden="true"></i></span> Departamentos</a>
                                         <a href="#" class="navbar-item">
-                                            <i class="fa fa-phone" aria-hidden="true"></i> Contacts</a>
+                                            <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span> Contatos</a>
                                         <a href="#" class="navbar-item">
-                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Knowledges</a>
+                                            <span class="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> Conhecimentos</a>
                                     </div>                            
                                 </div>                            
                             {% endif %}
@@ -57,21 +68,24 @@
                             {% if current_user.is_authenticated %}
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a class="navbar-link">
-                                    <span><i class="fa fa-user-circle" aria-hidden="true"></i> </span>{{ session['user_firstname'] }}
+                                    <span class="icon"><i class="fa fa-user-circle" aria-hidden="true"></i> </span>{{ session['user_firstname'] }}
                                 </a>
                                 <div class="navbar-dropdown is-right">
                                     <a href="{{ url_for('account_profile.profile') }}" class="navbar-item">
-                                        <span><i class="fa fa-user-circle" aria-hidden="true"></i> </span> Profile</a>
+                                        <span class="icon"><i class="fa fa-user-circle" aria-hidden="true"></i> </span> Perfil</a>
+                                    <a href="{{ url_for('account_permission.permissions') }}" class="navbar-item">
+                                        <span class="icon"><i class="fa fa-gavel" aria-hidden="true"></i> </span> Permissões</a>
+                                    <hr class="navbar-divider">
                                     <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                                        <span></span><i class="fa fa-sign-out" aria-hidden="true"></i> </span> Logout</a>
+                                        <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i> </span> Sair</a>
                                 </div>
                             </div>
                             {% endif %}
                             {% if not current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.login') }}" class="navbar-item"><i class="fa fa-sign-in"
-                                    aria-hidden="true"></i> Sign In</a>
-                            <a href="{{ url_for('auth.signup') }}" class="navbar-item"><i class="fa fa-user"
-                                    aria-hidden="true"></i> Sign Up</a>
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item"><span class="icon"><i class="fa fa-sign-in"
+                                    aria-hidden="true"></i></span> Entrar</a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item"><span class="icon"><i class="fa fa-user"
+                                    aria-hidden="true"></i></span> Cadastre-se</a>
                             {% endif %}
                         </div>
                     </div>
@@ -85,6 +99,43 @@
                 {% endblock %}
             </div>
         </div>
+
+        <div class="hero-foot">
+            <footer style="border-top: 1px solid hsl(0, 0%, 93%); padding-top: 1.7rem;">
+                <div class="container">
+                    <div class="columns is-vcentered is-centered has-text-centered-mobile">
+                        <div class="column is-narrow">
+                            <img src="{{ url_for('static', filename='../../static/img/logo_hor_m.png') }}" alt="logo">
+                        </div>
+                        <div class="column is-3">
+                            <p class="title is-6 has-text-grey-light has-text-weight-normal is-italic">
+                                Sistema para manutenção de conteúdo acessado pelo ChatBot da UFC.
+                            </p>
+                        </div>
+                        <div class="column is-4 is-narrow">
+                            &copy; 2020 <a href="http://ufc.br" class="has-text-grey-darker">Universidade Federal do Ceará</a>.
+                            <br>
+                            <i>Todos os direitos reservados.</i>
+                        </div>
+                        <div class="column is-narrow">
+                            Sitemap
+                            <ul>
+                                <li><a class="has-text-grey" href="{{ url_for('main.index') }}">Home</a></li>
+                                {% if not current_user.is_authenticated %}
+                                <li><a class="has-text-grey" href="{{ url_for('auth.login') }}">Entrar</a></li>
+                                <li><a class="has-text-grey" href="{{ url_for('auth.signup') }}">Cadastre-se</a></li>
+                                {% endif %}
+                                {% if current_user.is_authenticated %}
+                                <li><a class="has-text-grey" href="{{ url_for('auth.logout') }}">Sair</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        
     </section>
 </body>
 

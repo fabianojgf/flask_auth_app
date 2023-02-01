@@ -4,7 +4,7 @@
 
 <form method="POST" action="/profile/personal" class="form-horizontal">
     <fieldset class="fieldset">
-        <h3 class="fieldset-title">Personal Info</h3>
+        <h3 class="fieldset-title">Dados Pessoais</h3>
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -32,7 +32,7 @@
             <div class="column">
                 <fieldset>
                     <div class="field">
-                        <label class="label">Name</label>
+                        <label class="label">Nome</label>
                         <p class="control has-icons-left">
                             <input class="input is-primary" type="name" name="name" id="name" value="{{user.name}}"
                                 autofocus="">
@@ -52,12 +52,12 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label">User Type</label>
+                        <label class="label">Tipo de Usuário</label>
                         <p class="control has-icons-left">
                             <span class="select">
                                 <select disabled>
                                     <option value="1">Admin</option>
-                                    <option value="2">Common</option>
+                                    <option value="2">Comum</option>
                                 </select>
                             </span>
                             <span class="icon is-small is-left">
@@ -66,7 +66,7 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label">Current Password</label>
+                        <label class="label">Senha</label>
                         <p class="control has-icons-left has-icons-right password-container">
                             <input class="input is-primary" type="password" name="current-password" id="current-password" 
                                 placeholder="Current Password" autocomplete="new-password">
@@ -83,7 +83,7 @@
     <hr>
     <div class="column form_footer">
         <div class="field">
-            <input class="button is-primary" type="submit" value="Update Profile">
+            <input class="button is-primary" type="submit" value="Salvar">
         </div>
     </div>
 </form>

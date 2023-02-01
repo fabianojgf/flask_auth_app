@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from . import db
-from .models import User
+from .models import User, Access
 import os
 
 account_profile = Blueprint('account_profile', __name__)
@@ -71,3 +71,10 @@ def profile_security_post():
     db.session.commit()
     
     return redirect(url_for('account_profile.profile_security'))
+
+@account_profile.route('/profile/access')
+@login_required
+def profile_access():
+    accesses = Access.query.filter_by(user_id=current_user.id).all()
+    
+    return render_template('account/profile/access.html', accesses=accesses)

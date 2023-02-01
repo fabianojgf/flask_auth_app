@@ -1,47 +1,47 @@
-{% extends "base.html" %}
+{% extends "account/permissions/permissions.html" %}
 
-{% block content %}
+{% block content_permission %}
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bulma.min.css" rel="stylesheet">
 
 <div class="container">
-  <div class="content-panel">
-    <section class="module">
-      <div class="module-inner">
-        <h3>Permissions</h3>
-        <table id="example" class="table is-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th style="width: 30%;">Department</th>
-              <th style="width: 20%; text-align: center;">Permission Yype</th>
-              <th style="width: 10%; text-align: center;">Begin</th>
-              <th style="width: 10%; text-align: center;">End</th>
-              <th style="width: 10%; text-align: center;">Status</th>
-              <th style="width: 10%; text-align: center;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for permission in permissions %}
-            <tr>
-              <td>{{ permission.department.name }}</td>
-              <td style="text-align: center;">{{ permission.permission_type.description }}</td>
-              <td style="text-align: center;">{{ permission.begin }}</td>
-              <td style="text-align: center;">{{ permission.end }}</td>
-              <td style="text-align: center;">{{ permission.permission_status.description }}</td>
-              <td style="text-align: center;">
-                
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
+  <h3>Permissões</h3>
+  <table id="table" class="table is-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th style="width: 30%;">Departamento</th>
+        <th style="width: 20%; text-align: center;">Tipo de Permissão</th>
+        <th style="width: 10%; text-align: center;">Início</th>
+        <th style="width: 10%; text-align: center;">Fim</th>
+        <th style="width: 10%; text-align: center;">Status</th>
+        <th style="width: 10%; text-align: center;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for permission in permissions %}
+      <tr>
+        <td>{{ permission.department.name }}</td>
+        <td style="text-align: center;">{{ permission.permission_type.description }}</td>
+        <td style="text-align: center;">{{ permission.begin }}</td>
+        <td style="text-align: center;">{{ permission.end }}</td>
+        <td style="text-align: center;">{{ permission.permission_status.description }}</td>
+        <td style="text-align: center;">
+
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+<script type="text/javascript">
+  $(document).ready(function () {
+  $('#table').DataTable();
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bulma.min.js"></script>
 

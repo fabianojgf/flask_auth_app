@@ -8,19 +8,19 @@
             <div class="module-inner">
                 <form method="POST" action="/data/department/new" class="form-horizontal">
                     <fieldset class="fieldset">
-                        <h3 class="fieldset-title">Edit Department</h3>
+                        <h3 class="fieldset-title">Editar Departamento</h3>
                         <div class="field">
-                            <label class="label">Name</label>
+                            <label class="label">Nome</label>
                             <p class="control">
                                 <input class="input is-primary" type="text" name="name" id="name">
                             </p>
                         </div>
                         <div class="field">
-                            <label class="label">Parent Department</label>
+                            <label class="label">Departamento (Pai)</label>
                             <p class="control has-icons-left">
                                 <span class="select">
                                     <select name="parentDepartmentSelect">
-                                        <option value="0">Select</option>
+                                        <option value="0">Selecione</option>
                                         {% for parentDepartment in departments %}
                                         <option value="{{ parentDepartment.id }}">{{ parentDepartment.name }}</option>
                                         {% endfor %}
@@ -35,7 +35,7 @@
                     <hr>
                     <div class="column">
                         <div class="field">
-                            <input class="button is-primary" type="submit" value="Update">
+                            <input class="button is-primary" type="submit" value="Salvar">
                         </div>
                     </div>
                 </form>

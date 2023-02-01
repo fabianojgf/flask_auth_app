@@ -36,6 +36,10 @@ def create_app():
      # blueprint for any parts in our app
     from .account_profile import account_profile as account_profile_blueprint
     app.register_blueprint(account_profile_blueprint)
+         
+    # blueprint for any parts in our app
+    from .account_permission import account_permission as account_permission_blueprint
+    app.register_blueprint(account_permission_blueprint)
 
      # blueprint for any parts in our app
     from .permission import permission as permission_blueprint

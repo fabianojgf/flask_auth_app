@@ -44,7 +44,7 @@
             <form method="POST" action="/signup">
                                 
                 <div class="column">
-                    <h2>Sign Up</h2>
+                    <h2>Criar Conta</h2>
                 </div>
 
                 {% with messages = get_flashed_messages() %}
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="column">
-                    <label for="name">Name</label>
+                    <label for="name">Nome</label>
                     <div class="field">
                         <p class="control has-icons-left">
                             <input class="input is-primary" type="text" name="name" id="name" placeholder="Your Name">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="column">
-                    <label for="password">Password</label>
+                    <label for="password">Senha</label>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right password-container">
                             <input class="input is-primary" type="password" name="password" id="password" placeholder="Password">
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="column">
-                    <label for="password-repeat">Repeat Password</label>
+                    <label for="password-repeat">Repita a Senha</label>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right password-container">
                             <input class="input is-primary" type="password" name="password-repeat" id="password-repeat" placeholder="Repeat Password">
@@ -108,10 +108,10 @@
                 </div>
 
                 <div class="column">
-                    <button class="button is-primary is-fullwidth" type="submit">Sign Up</button>
+                    <button class="button is-primary is-fullwidth" type="submit">Cadastrar</button>
                 </div>
                 <div class="has-text-centered">
-                    <p class="is-size-7"> Already have an account? <a href="{{ url_for('auth.login') }}" class="has-text-primary">Sign In</a>
+                    <p class="is-size-7"> Ja possui uma conta? <a href="{{ url_for('auth.login') }}" class="has-text-primary">Entrar</a>
                     </p>
                 </div>
             </form>

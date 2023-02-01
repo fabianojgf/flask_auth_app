@@ -5,4 +5,5 @@ auth/project/*
 auth/var/*
 auth/bin/*
 auth/include/*
+auth/Scripts/*
 app/__pycache__/

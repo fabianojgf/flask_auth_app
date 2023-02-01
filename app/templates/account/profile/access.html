@@ -1,0 +1,69 @@
+{% extends "account/profile/profile.html" %}
+
+{% block content_profile %}
+
+<form method="POST" action="/profile/access" class="form-horizontal" autocomplete="off">
+    <h3 class="fieldset-title">Dados de Acessos</h3>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="column">
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="columns">
+        <div class="column">
+            <table id="table" class="table is-striped is-narrow is-hoverable is-fullwidth" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="text-align: center; width: 10%;">ID</th>
+                        <th style="text-align: center; width: 20%;">Endereço IP</th>
+                        <th style="text-align: left;">Agente de Usuário</th>
+                        <th style="text-align: center; width: 15%;">Entrada</th>
+                        <th style="text-align: center; width: 15%;">Saída</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for access in accesses %}
+                    <tr>
+                      <td style="text-align: center;">{{ access.id }}</td>
+                      <td style="text-align: center;">{{ access.address }}</td>
+                      <td style="text-align: left;">{{ access.user_agent }}</td>
+                      <td style="text-align: center;">{{ access.date_in }}</td>
+                      <td style="text-align: center;">{{ access.date_out }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align: center; width: 10%;">ID</th>
+                        <th style="text-align: center; width: 20%;">Endereço IP</th>
+                        <th style="text-align: left;">Agente de Usuário</th>
+                        <th style="text-align: center; width: 15%;">Entrada</th>
+                        <th style="text-align: center; width: 15%;">Saída</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        inativeMenuItens();
+        enableChangeVisibilityPassword();
+
+        var liElement = document.getElementById("profile_menu_access");
+        liElement.classList.add("active"); 
+    });
+
+    $(document).ready(function () {
+    $('#table').DataTable();
+});
+</script>
+
+{% endblock %}
