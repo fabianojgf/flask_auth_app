@@ -1,16 +1,11 @@
-{% extends "base.html" %}
+{% extends "base_intern.html" %}
 
-{% block content %}
+{% block content_intern %}
 
+<div class="columns is-flex is-flex-direction-column box" style="background-color: red;">
+    {% block content_permission %}
 
-<div class="hero is-fullheight hero-sign-up">
-    <div class="hero-body is-justify-content-center is-align-items-center">
-        <div class="columns is-flex is-flex-direction-column box">
-            {% block content_permission %}
-
-            {% endblock %}
-        </div>
-    </div>
+    {% endblock %}
 </div>
 
 {% endblock %}
