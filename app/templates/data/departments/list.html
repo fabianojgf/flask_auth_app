@@ -1,45 +1,69 @@
-{% extends "base.html" %}
+{% extends "data/departments/departments.html" %}
 
-{% block content %}
+{% block content_department %}
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bulma.min.css" rel="stylesheet">
 
-<div class="container">
-  <div class="content-panel">
-    <section class="module">
-      <div class="module-inner">
-        <h3>Departments</h3>
-        <table id="example" class="table is-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th style="width: 10%; text-align: center;">ID</th>
-              <th style="width: 50%;">Name</th>
-              <th style="width: 15%; text-align: center;">Creation Date</th>
-              <th style="width: 15%; text-align: center;">Update Date</th>
-              <th style="width: 10%; text-align: center;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for department in departments %}
-            <tr>
-              <td style="text-align: center;">{{ department.id }}</td>
-              <td>{{ department.name }}</td>
-              <td style="text-align: center;">{{ department.creation_date }}</td>
-              <td style="text-align: center;">{{ department.update_date }}</td>
-              <td style="text-align: center;">
-                
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
+<h2 class="subtitle">Departamentos / Unidades</h2>
+<hr/>
+
+<div class="container" style="width:100%; text-align: right;">
+  <a class="button is-info" href="{{ url_for('data_department.department_new') }}">
+    <span class="icon is-small">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    </span>
+    <span>Adicionar</span>
+  </a>
+</div>
+<br />
+
+<div class="container" style="width:100%;">
+  <table id="table" class="table is-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th style="width: 10%; text-align: center;">ID</th>
+        <th style="width: 50%;">Name</th>
+        <th style="width: 15%; text-align: center;">Creation Date</th>
+        <th style="width: 15%; text-align: center;">Update Date</th>
+        <th style="width: 3%; text-align: center;"></th>
+        <th style="width: 3%; text-align: center;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for department in departments %}
+      <tr>
+        <td style="text-align: center;">{{ department.id }}</td>
+        <td>{{ department.name }}</td>
+        <td style="text-align: center;">{{ department.creation_date }}</td>
+        <td style="text-align: center;">{{ department.update_date }}</td>
+        <td style="text-align: center;">
+          <a class="button is-primary is-square" href="#">
+            <span class="icon is-small">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+        <td style="text-align: center;">
+          <a class="button is-danger is-square" href="#">
+            <span class="icon is-small">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#table').DataTable();
+  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bulma.min.js"></script>
 

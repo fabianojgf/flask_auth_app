@@ -2,9 +2,11 @@
 
 {% block content_permission %}
 
+<h2 class="subtitle">Editar Permissão</h2>
+<hr/>
+
 <form method="POST" action="/account/permissions/edit" class="form-horizontal">
-    <fieldset class="fieldset">
-        <h3 class="fieldset-title">Editar Permissão</h3>
+    <div class="fieldset">
         <div class="field">
             <label class="label">Departamento</label>
             <p class="control has-icons-left">
@@ -42,7 +44,7 @@
             <label class="label">Início</label>
             <div class="control">
                 <p class="control has-icons-left">
-                    <input class="input is-primary" type="date" name="begin" id="begin">
+                    <input class="input is-info" type="date" name="begin" id="begin">
                     <span class="icon is-small is-left">
                         <i class="fa fa-calendar"></i>
                     </span>
@@ -53,18 +55,18 @@
             <label class="label">Fim</label>
             <div class="control">
                 <p class="control has-icons-left">
-                    <input class="input is-primary" type="date" name="end" id="end">
+                    <input class="input is-info" type="date" name="end" id="end">
                     <span class="icon is-small is-left">
                         <i class="fa fa-calendar"></i>
                     </span>
                 </p>
             </div>
         </div>
-    </fieldset>
+    </div>
     <hr>
     <div class="column">
         <div class="field">
-            <input class="button is-primary" type="submit" value="Salvar">
+            <input class="button is-info" type="submit" value="Salvar">
         </div>
     </div>
 </form>

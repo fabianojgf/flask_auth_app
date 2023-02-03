@@ -6,16 +6,6 @@
     <fieldset class="fieldset">
         <h3 class="fieldset-title">Dados Pessoais</h3>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="column">
-            <div class="notification is-danger">
-                {{ messages[0] }}
-            </div>
-        </div>
-        {% endif %}
-        {% endwith %}
-
         <div class="columns">
             <div class="column is-3">
                 <figure class="image is-square">
@@ -34,7 +24,7 @@
                     <div class="field">
                         <label class="label">Nome</label>
                         <p class="control has-icons-left">
-                            <input class="input is-primary" type="name" name="name" id="name" value="{{user.name}}"
+                            <input class="input is-info" type="name" name="name" id="name" value="{{user.name}}"
                                 autofocus="">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user"></i>
@@ -44,7 +34,7 @@
                     <div class="field">
                         <label class="label">Email</label>
                         <p class="control has-icons-left">
-                            <input class="input is-primary" type="email" name="email" id="email" value="{{user.email}}"
+                            <input class="input is-info" type="email" name="email" id="email" value="{{user.email}}"
                                 autofocus="">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-envelope"></i>
@@ -56,8 +46,11 @@
                         <p class="control has-icons-left">
                             <span class="select">
                                 <select disabled>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Comum</option>
+                                    <option value="0">Selecione</option>
+                                    {% for userType in userTypes %}
+                                    <option value="{{ userType.id }}" {{ 'selected' if userType.id == user.user_type_id else '' }}>{{ userType.description }}
+                                    </option>
+                                    {% endfor %}
                                 </select>
                             </span>
                             <span class="icon is-small is-left">
@@ -68,7 +61,7 @@
                     <div class="field">
                         <label class="label">Senha</label>
                         <p class="control has-icons-left has-icons-right password-container">
-                            <input class="input is-primary" type="password" name="current-password" id="current-password" 
+                            <input class="input is-info" type="password" name="current-password" id="current-password" 
                                 placeholder="Current Password" autocomplete="new-password">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-lock"></i>
@@ -83,7 +76,7 @@
     <hr>
     <div class="column form_footer">
         <div class="field">
-            <input class="button is-primary" type="submit" value="Salvar">
+            <input class="button is-info" type="submit" value="Salvar">
         </div>
     </div>
 </form>

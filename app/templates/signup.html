@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "base_ex.html" %}
 
-{% block content %}
+{% block content_base %}
 
 <style>
     .password-container {        
@@ -61,7 +61,7 @@
                     <label for="email">Email</label>
                     <div class="field">
                         <p class="control has-icons-left">
-                            <input class="input is-primary" type="email" name="email" id="email" placeholder="Your Email" autofocus="">
+                            <input class="input is-info" type="email" name="email" id="email" placeholder="Your Email" autofocus="">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-envelope"></i>
                             </span>
@@ -73,7 +73,7 @@
                     <label for="name">Nome</label>
                     <div class="field">
                         <p class="control has-icons-left">
-                            <input class="input is-primary" type="text" name="name" id="name" placeholder="Your Name">
+                            <input class="input is-info" type="text" name="name" id="name" placeholder="Your Name">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user"></i>
                             </span>
@@ -85,7 +85,7 @@
                     <label for="password">Senha</label>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right password-container">
-                            <input class="input is-primary" type="password" name="password" id="password" placeholder="Password">
+                            <input class="input is-info" type="password" name="password" id="password" placeholder="Password">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-lock"></i>
                             </span>
@@ -98,7 +98,7 @@
                     <label for="password-repeat">Repita a Senha</label>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right password-container">
-                            <input class="input is-primary" type="password" name="password-repeat" id="password-repeat" placeholder="Repeat Password">
+                            <input class="input is-info" type="password" name="password-repeat" id="password-repeat" placeholder="Repeat Password">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-lock"></i>
                             </span>
@@ -108,10 +108,10 @@
                 </div>
 
                 <div class="column">
-                    <button class="button is-primary is-fullwidth" type="submit">Cadastrar</button>
+                    <button class="button is-info is-fullwidth" type="submit">Cadastrar</button>
                 </div>
                 <div class="has-text-centered">
-                    <p class="is-size-7"> Ja possui uma conta? <a href="{{ url_for('auth.login') }}" class="has-text-primary">Entrar</a>
+                    <p class="is-size-7"> Ja possui uma conta? <a href="{{ url_for('auth.login') }}" class="has-text-info">Entrar</a>
                     </p>
                 </div>
             </form>

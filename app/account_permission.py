@@ -11,6 +11,8 @@ account_permission = Blueprint('account_permission', __name__)
 @account_permission.route('/account/permissions')
 @login_required
 def permissions():
+    nav_levels = ["Área Interna", "Perfil", "Permissões"]
+
     permissions = Permission.query.filter_by(
         user_id=current_user.id, permission_type_id=3, active=True).all()
     permissions_sol = Permission.query.filter_by(
@@ -27,11 +29,13 @@ def permissions():
         permissions_sol=permissions_sol, 
         permissions_other=permissions_other,
         permissionTypes=permissionTypes,
-        departments=departments)
+        departments=departments,
+        nav_levels=nav_levels)
 
 @account_permission.route('/account/permissions/new')
 @login_required
 def permission_new():
+    nav_levels = ["Área Interna", "Perfil", "Permissões", "Nova"]
 
     # Selects
     permissionTypes = PermissionType.query.filter().all()
@@ -39,24 +43,28 @@ def permission_new():
 
     return render_template('account/permissions/form-new.html',
         permissionTypes=permissionTypes,
-        departments=departments)
+        departments=departments,
+        nav_levels=nav_levels)
 
 @account_permission.route('/account/permissions/new', methods=['POST'])
 @login_required
 def permission_new_post():
-    return render_template(url_for('account_permission.permissions'))
+    return redirect(url_for('account_permission.permissions'))
 
 @account_permission.route('/account/permissions/edit')
 @login_required
 def permission_update():
-    return render_template('account/permissions/form-edit.html')
+    nav_levels = ["Área Interna", "Perfil", "Permissões", "Editar"]
+    
+    return render_template('account/permissions/form-edit.html',
+        nav_levels=nav_levels)
 
 @account_permission.route('/account/permissions/edit', methods=['POST'])
 @login_required
 def permission_update_post():
-    return render_template(url_for('account_permission.permissions'))
+    return redirect(url_for('account_permission.permissions'))
 
 @account_permission.route('/account/permissions/delete', methods=['POST'])
 @login_required
 def permission_delete_post():
-    return render_template(url_for('account_permission.permissions'))
+    return redirect(url_for('account_permission.permissions'))

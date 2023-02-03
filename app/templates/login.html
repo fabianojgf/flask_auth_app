@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "base_ex.html" %}
 
-{% block content %}
+{% block content_base %}
 
 <style>
     .password-container {        
@@ -62,7 +62,7 @@
                     <label for="email">Email</label>
                     <div class="field">
                         <p class="control has-icons-left">
-                            <input class="input is-primary" type="email" name="email" id="email" placeholder="Your Email" autofocus="">
+                            <input class="input is-info" type="email" name="email" id="email" placeholder="Your Email" autofocus="">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-envelope"></i>
                             </span>
@@ -74,21 +74,21 @@
                     <label for="password">Senha</label>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right password-container">
-                            <input class="input is-primary" type="password" name="password" id="password" placeholder="Password">
+                            <input class="input is-info" type="password" name="password" id="password" placeholder="Password">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-lock"></i>
                             </span>
                             <i class="fa fa-eye"></i>                        
                         </p>
-                        <a href="forget.html" class="is-size-7 has-text-primary">Esqueceu a senha?</a>
+                        <a href="forget.html" class="is-size-7 has-text-info">Esqueceu a senha?</a>
                     </div>
                 </div>
 
                 <div class="column">
-                    <button class="button is-primary is-fullwidth" type="submit">Entrar</button>
+                    <button class="button is-info is-fullwidth" type="submit">Entrar</button>
                 </div>
                 <div class="has-text-centered">
-                    <p class="is-size-7"> Não possui uma conta? <a href="{{ url_for('auth.signup') }}" class="has-text-primary">Cadastre-se</a>
+                    <p class="is-size-7"> Não possui uma conta? <a href="{{ url_for('auth.signup') }}" class="has-text-info">Cadastre-se</a>
                     </p>
                 </div>
             </form>

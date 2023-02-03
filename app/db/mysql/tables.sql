@@ -69,20 +69,38 @@ WITH (
     OIDS = FALSE
 );
 
+CREATE TABLE IF NOT EXISTS general.user_type
+(
+    id int4 NOT NULL,
+    description character varying(30) NOT NULL,
+    
+	CONSTRAINT user_type_pkey 
+		PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
 CREATE TABLE IF NOT EXISTS general."user"
 (
     id int4 NOT NULL,
     name character varying(200) NOT NULL,
     email character varying(200) NOT NULL,
     password character varying(200) NOT NULL,
-    type int4 DEFAULT 2,
+    user_type_id int4 NOT NULL,
     active boolean DEFAULT true,
     authorized boolean DEFAULT false,
     creation_date timestamp without time zone,
     update_date timestamp without time zone,
     
 	CONSTRAINT user_pkey 
-		PRIMARY KEY (id)
+		PRIMARY KEY (id),
+	CONSTRAINT user_type_id_fkey 
+		FOREIGN KEY (user_type_id)
+		REFERENCES general.user_type (id) MATCH SIMPLE
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION
+		NOT VALID
 )
 WITH (
     OIDS = FALSE

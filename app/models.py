@@ -3,9 +3,15 @@ from enum import Enum
 from datetime import date
 from app import db
 
-class UserType(Enum):
+class UserType(db.Model):
+    __tablename__ = 'user_type'
+    __table_args__ = {'schema':'general'}
+
+    id = db.Column(db.Integer, db.Sequence("user_type_seq", schema="general"), primary_key=True)
+    description = db.Column(db.String(30))
+
     ADMIN = 1
-    COMMON = 2        
+    COMMON = 2    
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -15,7 +21,8 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    type = db.Column(db.Integer)
+    user_type_id = db.Column(db.Integer, db.ForeignKey('general.user_type.id'))   
+    user_type = db.relationship("UserType", backref=db.backref("user_type", uselist=False)) 
     active = db.Column(db.Boolean)  
     authorized = db.Column(db.Boolean)
     creation_date = db.Column(db.Date)
@@ -25,15 +32,8 @@ class User(UserMixin, db.Model):
     def creation_date_str(self):
         return self.creation_date.strftime("%d/%m/%Y")
     @property
-    def type_str(self):
-        if self.type == UserType.ADMIN.value:
-            return "Admin"
-        if self.type == UserType.COMMON.value:
-            return "Common User"
-        return "Unknown"
-    @property
     def is_admin(self):
-        return self.type == 1
+        return self.type == UserType.ADMIN
     @property
     def is_active(self):
         return self.active

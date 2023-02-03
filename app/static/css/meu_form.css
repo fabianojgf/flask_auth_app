@@ -1,0 +1,47 @@
+@media (max-width:540px) {
+    .container {
+        width: 100% !important;
+    }
+    .fieldname {
+        width: 100% !important;
+    }
+    .fielddate {
+        width: 100% !important;
+    }
+}
+
+@media (min-width:541px) {
+    .container {
+        width: 100% !important;
+    }
+    .fieldname {
+        width: 90% !important;
+    }
+    .fielddate {
+        width: 40% !important;
+    }
+}
+
+@media (min-width:767px) {
+    .container {
+        width: 100% !important;
+    }
+    .fieldname {
+        width: 70% !important;
+    }
+    .fielddate {
+        width: 30% !important;
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        width: 100% !important;
+    }
+    .fieldname {
+        width: 50% !important;
+    }
+    .fielddate {
+        width: 25% !important;
+    }
+}

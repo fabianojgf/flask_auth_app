@@ -5,20 +5,20 @@ from . import db
 from .models import User, Department
 import os
 
-department = Blueprint('department', __name__)
+data_department = Blueprint('data_department', __name__)
 
-@department.route('/data/departments')
+@data_department.route('/data/departments')
 @login_required
-def data_departments():
+def departments():
     parentDepartments = Department.query.filter_by(active=True).all()
 
     return render_template('data/departments/list.html', 
         departments=parentDepartments, 
         parentDepartments=parentDepartments)
 
-@department.route('/data/department/new')
+@data_department.route('/data/department/new')
 @login_required
-def data_department_new():
+def department_new():
 
     # Selects
     parentDepartments = Department.query.filter().all()
@@ -26,9 +26,9 @@ def data_department_new():
     return render_template('data/departments/form-new.html', 
         parentDepartments=parentDepartments)
 
-@department.route('/data/department/new', methods=['POST'])
+@data_department.route('/data/department/new', methods=['POST'])
 @login_required
-def account_permission_new_post():
+def department_new_post():
     name = request.form.get('name')
     parentDepartmentValue = request.form.get('parentDepartmentSelect',type=int)
 
@@ -46,19 +46,19 @@ def account_permission_new_post():
     db.session.add(new_department)
     db.session.commit()
 
-    return render_template(url_for('department.data_departments'))
+    return redirect(url_for('data_department.departments'))
 
-@department.route('/data/department/edit')
+@data_department.route('/data/department/edit')
 @login_required
-def account_permission_update():
+def department_update():
     return render_template('/data/departments/form-edit.html')
 
-@department.route('/data/department/edit', methods=['POST'])
+@data_department.route('/data/department/edit', methods=['POST'])
 @login_required
-def account_permission_update_post():
-    return render_template(url_for('department.data_departments'))
+def department_update_post():
+    return redirect(url_for('data_department.departments'))
 
-@department.route('/data/department/delete', methods=['POST'])
+@data_department.route('/data/department/delete', methods=['POST'])
 @login_required
-def account_permission_delete_post():
-    return render_template(url_for('department.data_departments'))
+def department_delete_post():
+    return redirect(url_for('data_department.departments'))

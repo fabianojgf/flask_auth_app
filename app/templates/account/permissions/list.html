@@ -5,8 +5,19 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bulma.min.css" rel="stylesheet">
 
-<div class="container" style="background-color: green;">
-  <h3>Permissões</h3>
+<h2 class="subtitle">Permissões</h2>
+<hr/>
+
+<div class="container" style="width:100%; text-align: right;">
+  <a class="button is-info" href="{{ url_for('account_permission.permission_new') }}">
+    <span class="icon is-small">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    </span>
+    <span>Adicionar</span>
+  </a>
+</div>
+<br />
+<div class="container" style="width:100%;">
   <table id="table" class="table is-striped" style="width:100%">
     <thead>
       <tr>
@@ -15,7 +26,8 @@
         <th style="width: 10%; text-align: center;">Início</th>
         <th style="width: 10%; text-align: center;">Fim</th>
         <th style="width: 10%; text-align: center;">Status</th>
-        <th style="width: 10%; text-align: center;"></th>
+        <th style="width: 3%; text-align: center;"></th>
+        <th style="width: 3%; text-align: center;"></th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +39,18 @@
         <td style="text-align: center;">{{ permission.end }}</td>
         <td style="text-align: center;">{{ permission.permission_status.description }}</td>
         <td style="text-align: center;">
-
+          <a class="button is-primary" href="#">
+            <span class="icon is-small">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+        <td style="text-align: center;">
+          <a class="button is-danger" href="#">
+            <span class="icon is-small">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </span>
+          </a>
         </td>
       </tr>
       {% endfor %}
@@ -37,8 +60,8 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-  $('#table').DataTable();
-});
+    $('#table').DataTable();
+  });
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

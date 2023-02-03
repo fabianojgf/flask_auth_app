@@ -46,7 +46,7 @@ def create_app():
     app.register_blueprint(permission_blueprint)
 
     # blueprint for any parts in our app
-    from .department import department as department_blueprint
-    app.register_blueprint(department_blueprint)
+    from .data_department import data_department as data_department_blueprint
+    app.register_blueprint(data_department_blueprint)
 
     return app

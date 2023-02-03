@@ -78,6 +78,22 @@ ALTER SEQUENCE general.permission_status_seq OWNER TO postgres;
 GRANT ALL ON SEQUENCE general.permission_status_seq TO postgres;
 GRANT SELECT ON SEQUENCE general.permission_status_seq TO postgres;
 
+-- DROP SEQUENCE general.user_type_seq;
+
+CREATE SEQUENCE general.user_type_seq
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1
+    CACHE 1
+    NO CYCLE;
+
+-- Permissions
+
+ALTER SEQUENCE general.user_type_seq OWNER TO postgres;
+GRANT ALL ON SEQUENCE general.user_type_seq TO postgres;
+GRANT SELECT ON SEQUENCE general.user_type_seq TO postgres;
+
 -- DROP SEQUENCE general.user_seq;
 
 CREATE SEQUENCE general.user_seq

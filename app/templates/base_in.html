@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="../../../static/css/profile.css" />
+<link rel="stylesheet" href="../../../static/css/meu_form.css" />
+
+<div class="hero-head">
+    <div class="container">
+        <section class="module">
+            {% with errors = get_flashed_messages(category_filter=["error"]), 
+                successes = get_flashed_messages(category_filter=["success"]) %}
+            {% if errors or successes %}
+            <div class="module-inner" style="padding-top: 5px; padding-bottom: 5px;">
+                {% if errors %}
+                <div class="notification is-danger">
+                    <button class="delete"></button>
+                    <ul>
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if successes %}
+                <div class="notification is-primary">
+                    <button class="delete"></button>
+                    <ul>
+                        {% for success in successes %}
+                        <li>{{ success }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            {% if nav_levels %}
+            <div class="module-inner" style="padding-top: 2px; padding-bottom: 2px;">
+                <div class="notification" style="font-size: smaller;">
+                {% for nav_level in nav_levels %}
+                    {{ nav_level }} >
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="module-inner" style="margin-top: 5px; margin-bottom: 5px;">
+                {% block content_base %}
+
+                {% endblock %}
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>
+
+{% endblock %}

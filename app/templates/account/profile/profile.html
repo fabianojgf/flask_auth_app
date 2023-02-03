@@ -1,21 +1,15 @@
-{% extends "base.html" %}
+{% extends "base_in.html" %}
 
-{% block content %}
+{% block content_base %}
 
-<link rel="stylesheet" href="../../../static/css/profile.css" />
-
-<div class="container">
-    <div class="view-account" style="background-color: red;">
-        <section class="module" style="background-color: blue;">
-            <div class="module-inner" style="background-color: yellow;">
-                <p>Teste</p>
+<div class="container box theme-3">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+                <h2 class="title">Perfil</h2>
+                <hr/>
             </div>
-            <br/>
-            <div class="module-inner" style="background-color: yellow;">
-                <p>Teste</p>
-            </div>
-            <br/>
-            <div class="module-inner" style="background-color: purple;">
+            <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
                         <img class="is-rounded"
@@ -23,10 +17,10 @@
                         <ul class="meta list list-unstyled">
                             <li class="name">{{ current_user.name }}
                                 {% if current_user.is_admin %}
-                                <p class="user-type-admin">{{ current_user.type_str }}</p>
+                                <p class="user-type-admin">{{ current_user.user_type.description }}</p>
                                 {% endif %}
                                 {% if not current_user.is_admin %}
-                                <p class="user-type-common">{{ current_user.type_str }}</p>
+                                <p class="user-type-common">{{ current_user.user_type.description }}</p>
                                 {% endif %}
                             </li>
                             <li class="activity">Usuário desde: <br/>{{ current_user.creation_date_str }}</li>
