@@ -9,7 +9,3 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     return render_template('index.html')
-
-@main.route('/profiletest')
-def profiletest():
-    return render_template('account/profile/profile_test.html')

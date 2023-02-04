@@ -1,0 +1,17 @@
+{% extends "base_in.html" %}
+
+{% block content_base %}
+
+<div class="container" style="min-height: 800px;">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+            {% block content_user %}
+
+            {% endblock %}
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

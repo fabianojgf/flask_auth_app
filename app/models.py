@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
         return self.creation_date.strftime("%d/%m/%Y")
     @property
     def is_admin(self):
-        return self.type == UserType.ADMIN
+        return self.user_type_id == UserType.ADMIN
     @property
     def is_active(self):
         return self.active
@@ -47,6 +47,7 @@ class Department(db.Model):
 
     id = db.Column(db.Integer, db.Sequence("department_seq", schema="general"), primary_key=True)
     name = db.Column(db.String(200))
+    sigla = db.Column(db.String(30))
     parent_id = db.Column(db.Integer, db.ForeignKey('general.department.id'))
     active = db.Column(db.Boolean)  
     creation_date = db.Column(db.Date)

@@ -1,0 +1,76 @@
+{% extends "admin/users/users.html" %}
+
+{% block content_user %}
+
+<h2 class="subtitle">Editar Usuário</h2>
+<hr/>
+
+<form method="POST" action="/admin/user/edit" class="form-horizontal">
+    <div class="fieldset">
+        <div class="field fieldname">
+            <label class="label">Nome</label>
+            <p class="control has-icons-left">
+                <input class="input is-info" type="name" name="name" id="name" value="{{user.name}}"
+                    autofocus="">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field fieldname">
+            <label class="label">Email</label>
+            <p class="control has-icons-left">
+                <input class="input is-info" type="email" name="email" id="email" value="{{user.email}}"
+                    autofocus="">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field fieldnamesmall">
+            <label class="label">Tipo de Usuário</label>
+            <p class="control has-icons-left">
+                <span class="select">
+                    <select name="userTypeSelect">
+                        <option value="0">Selecione</option>
+                        {% for userType in userTypes %}
+                        <option value="{{ userType.id }}" {{ 'selected' if userType.id == user.user_type_id else '' }}>{{ userType.description }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </span>
+                <span class="icon is-small is-left">
+                    <i class="fa fa-gavel"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field fieldname">
+            <label class="label">Senha</label>
+            <p class="control has-icons-left has-icons-right password-container">
+                <input class="input is-info" type="password" name="password" id="password" placeholder="Password" autocomplete="new-password">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+                <i class="fa fa-eye"></i>                        
+            </p>
+        </div>
+        <div class="field fieldname">
+            <label class="label">Repita a Senha</label>
+            <p class="control has-icons-left has-icons-right password-container">
+                <input class="input is-info" type="password" name="password-repeat" id="password-repeat" placeholder="Repeat Password" autocomplete="new-password">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+                <i class="fa fa-eye"></i>                        
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div class="column">
+        <div class="field">
+            <input class="button is-info" type="submit" value="Salvar">
+        </div>
+    </div>
+</form>
+
+{% endblock %}

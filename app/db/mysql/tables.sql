@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS general.department
 (
     id int4 NOT NULL,
     name character varying(200) NOT NULL,
+	sigla character varying(10) NOT NULL,
     parent_id int4 NULL,
     active boolean DEFAULT true,
     creation_date timestamp without time zone,

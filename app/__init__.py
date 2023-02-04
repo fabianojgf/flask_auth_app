@@ -42,8 +42,12 @@ def create_app():
     app.register_blueprint(account_permission_blueprint)
 
      # blueprint for any parts in our app
-    from .permission import permission as permission_blueprint
-    app.register_blueprint(permission_blueprint)
+    from .admin_permission import admin_permission as admin_permission_blueprint
+    app.register_blueprint(admin_permission_blueprint)
+
+    # blueprint for any parts in our app
+    from .admin_user import admin_user as admin_user_blueprint
+    app.register_blueprint(admin_user_blueprint)
 
     # blueprint for any parts in our app
     from .data_department import data_department as data_department_blueprint

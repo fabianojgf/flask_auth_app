@@ -7,11 +7,11 @@
 
 <form method="POST" action="/account/permissions/edit" class="form-horizontal">
     <div class="fieldset">
-        <div class="field">
+        <div class="field fieldname">
             <label class="label">Departamento</label>
             <p class="control has-icons-left">
-                <span class="select">
-                    <select name="departmentSelect">
+                <span class="select" style="width: 100%;">
+                    <select name="departmentSelect" style="width: 100%;">
                         <option value="0">Selecione</option>
                         {% for department in departments %}
                         <option value="{{ department.id }}">{{ department.name }}</option>
@@ -23,11 +23,11 @@
                 </span>
             </p>
         </div>
-        <div class="field">
+        <div class="field fieldname">
             <label class="label">Tipo de Permissão</label>
             <p class="control has-icons-left">
-                <span class="select">
-                    <select name="permissionTypeSelect">
+                <span class="select" style="width: 100%;">
+                    <select name="permissionTypeSelect" style="width: 100%;">
                         <option value="0">Selecione</option>
                         {% for permissionType in permissionTypes %}
                         <option value="{{ permissionType.id }}">{{ permissionType.description }}
@@ -40,7 +40,7 @@
                 </span>
             </p>
         </div>
-        <div class="field">
+        <div class="field fielddate">
             <label class="label">Início</label>
             <div class="control">
                 <p class="control has-icons-left">
@@ -51,7 +51,7 @@
                 </p>
             </div>
         </div>
-        <div class="field">
+        <div class="field fielddate">
             <label class="label">Fim</label>
             <div class="control">
                 <p class="control has-icons-left">

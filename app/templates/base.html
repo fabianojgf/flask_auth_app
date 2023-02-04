@@ -48,14 +48,31 @@
                         <div class="navbar-start">
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
                                 <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span> Home</a>
-                            {% if current_user.is_authenticated %}                       
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.is_admin %}
                                 <div class="navbar-item has-dropdown is-hoverable">
                                     <a class="navbar-link">
-                                        Data
+                                        Admin
                                     </a>
                                     <div class="navbar-dropdown is-right">
+                                        <a href="{{ url_for('admin_user.users') }}" class="navbar-item">
+                                            <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span> Usuários</a>
+                                        <a href="{{ url_for('admin_permission.permissions') }}" class="navbar-item">
+                                            <span class="icon"><i class="fa fa-gavel" aria-hidden="true"></i></span> Permissões</a>
+                                        <a href="{{ url_for('admin_user.users') }}" class="navbar-item">
+                                            <span class="icon"><i class="fa fa-gavel" aria-hidden="true"></i></span> Autorizações</a>
+                                    </div>                            
+                                </div>
+                                {% endif %}
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">
+                                        Dados
+                                    </a>
+                                    <div class="navbar-dropdown is-right">
+                                        {% if current_user.is_admin %}
                                         <a href="{{ url_for('data_department.departments') }}" class="navbar-item">
                                             <span class="icon"><i class="fa fa-university" aria-hidden="true"></i></span> Departamentos</a>
+                                        {% endif %}
                                         <a href="#" class="navbar-item">
                                             <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span> Contatos</a>
                                         <a href="#" class="navbar-item">

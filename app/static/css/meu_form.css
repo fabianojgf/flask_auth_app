@@ -2,6 +2,9 @@
     .container {
         width: 100% !important;
     }
+    .fieldnamesmall {
+        width: 100% !important;
+    }
     .fieldname {
         width: 100% !important;
     }
@@ -13,6 +16,9 @@
 @media (min-width:541px) {
     .container {
         width: 100% !important;
+    }
+    .fieldnamesmall {
+        width: 40% !important;
     }
     .fieldname {
         width: 90% !important;
@@ -26,6 +32,9 @@
     .container {
         width: 100% !important;
     }
+    .fieldnamesmall {
+        width: 30% !important;
+    }
     .fieldname {
         width: 70% !important;
     }
@@ -37,6 +46,9 @@
 @media (min-width:992px) {
     .container {
         width: 100% !important;
+    }
+    .fieldnamesmall {
+        width: 25% !important;
     }
     .fieldname {
         width: 50% !important;
